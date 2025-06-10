@@ -1,0 +1,1 @@
+# hand-of-god-bot-guide
