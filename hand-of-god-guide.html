@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand of God Bot V2.2 - Hướng Dẫn Trading Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6c63ff 0%, #5a52ff 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .features-grid {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .content-section {
+            padding: 40px;
+        }
+
+        .section-title {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6c63ff, #ff6b9d);
+            border-radius: 2px;
+        }
+
+        .setup-steps {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .step-card {
+            background: #f8f9ff;
+            border-left: 5px solid #6c63ff;
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.2);
+        }
+
+        .step-number {
+            background: #6c63ff;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .step-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .parameters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .optimization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .opt-card {
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .opt-card.safe {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            color: white;
+        }
+
+        .opt-card.moderate {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .opt-card.aggressive {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+        }
+
+        .account-info {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .account-info p {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .params-detail {
+            margin-top: 20px;
+        }
+
+        .param-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .param-name {
+            font-weight: bold;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .param-value {
+            background: rgba(255,255,255,0.3);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .param-desc {
+            font-size: 0.9em;
+            opacity: 0.9;
+            flex: 2;
+            min-width: 150px;
+            text-align: right;
+        }
+
+        .detailed-params {
+            margin: 40px 0;
+        }
+
+        .param-section {
+            margin-bottom: 50px;
+            background: #f8f9ff;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .param-section h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .param-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .param-detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #6c63ff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .param-detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.2);
+        }
+
+        .param-detail-card h4 {
+            color: #6c63ff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .param-info p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .param-info strong {
+            color: #333;
+        }
+
+        .param-info ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .advanced-settings {
+            margin: 50px 0;
+        }
+
+        .advanced-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .advanced-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .advanced-card h3 {
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+        }
+
+        .currency-pairs, .timeframe-settings {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pair-setting, .tf-setting {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .pair-setting h4, .tf-setting h4 {
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .pair-setting ul, .tf-setting ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pair-setting li, .tf-setting li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        .pair-setting li::before, .tf-setting li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .optimization-tips {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .optimization-tips h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #28a745;
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tip-card h4 {
+            color: #28a745;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .tip-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .risk-management-detail {
+            margin: 50px 0;
+        }
+
+        .risk-scenarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .scenario-card {
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scenario-card.danger {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+        }
+
+        .scenario-card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .scenario-card.success {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            color: white;
+        }
+
+        .scenario-content h4 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .scenario-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .scenario-content li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            background: rgba(255,255,255,0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .scenario-content li::before {
+            content: '●';
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .emergency-procedures {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .emergency-procedures h3 {
+            color: #e17055;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .emergency-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .emergency-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .step-icon {
+            background: #e17055;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .warning-title {
+            color: #d63384;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-content {
+            color: #6f2c91;
+            line-height: 1.6;
+        }
+
+        .troubleshooting {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .troubleshooting h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .troubleshooting ul {
+            list-style: none;
+        }
+
+        .troubleshooting li {
+            background: white;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            position: relative;
+        }
+
+        .troubleshooting li::before {
+            content: '❌';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .troubleshooting li {
+            padding-left: 50px;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .optimization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .param-details-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .param-row {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+            
+            .param-desc {
+                text-align: left;
+                margin-top: 5px;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><span class="emoji">🤖</span> Hand of God Bot V2.2</h1>
+            <p>Hướng Dẫn Sử Dụng Thực Tế - Đơn Giản & Hiệu Quả</p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3><span class="emoji">⚡</span> Tóm Tắt Nhanh - 30 Giây Hiểu Bot</h3>
+                <p><strong>🟢 Thấy "Buy" + Vùng Xanh</strong><br>→ Tìm cơ hội MUA</p>
+                <p><strong>🔴 Thấy "Sell" + Vùng Đỏ</strong><br>→ Tìm cơ hội BÁN</p>
+                <p><strong>📊 Volume Cao + Tín Hiệu</strong><br>→ Độ tin cậy cao</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3><span class="emoji">⚠️</span> Không có Label rõ ràng</h3>
+                <p><strong>→ ĐỪNG trade</strong><br>Bot sử dụng thuật toán Martingale phức tạp, cần tín hiệu rõ ràng để đảm bảo an toàn.</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-section">
+            <h2 class="section-title"><span class="emoji">🔧</span> Cách Cài Đặt Hand of God Vào MetaTrader</h2>
+            
+            <div class="setup-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Mở MetaTrader 4/5</div>
+                    <div class="step-content">Đăng nhập vào tài khoản MetaTrader của bạn</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Vào Expert Advisors</div>
+                    <div class="step-content">Nhấn Ctrl + Alt + E hoặc vào menu "Expert Advisors"</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Import File .ex4/.ex5</div>
+                    <div class="step-content">Copy file Hand_of_God.ex4 vào thư mục MQL4/Experts</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Kích Hoạt Auto Trading</div>
+                    <div class="step-content">Bật "Allow Automated Trading" và "Allow DLL imports"</div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Kéo Bot Vào Chart</div>
+                    <div class="step-content">Kéo Hand_of_God từ Navigator vào chart và thiết lập tham số</div>
+                </div>
+            </div>
+
+            <h2 class="section-title"><span class="emoji">🔧</span> Cài Đặt Tối Ưu Cho Từng Loại Tài Khoản</h2>
+            
+            <div class="optimization-grid">
+                <div class="opt-card safe">
+                    <h3><span class="emoji">🟢</span> Cấu Hình An Toàn (Newbie)</h3>
+                    <div class="account-info">
+                        <p><strong>Vốn khuyến nghị:</strong> $500 - $1000</p>
+                        <p><strong>Mục tiêu:</strong> 5-10%/tháng</p>
+                    </div>
+                    <div class="params-detail">
+                        <div class="param-row">
+                            <span class="param-name">First Step:</span>
+                            <span class="param-value">0.01</span>
+                            <span class="param-desc">Lot nhỏ nhất để test</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Step 1:</span>
+                            <span class="param-value">30</span>
+                            <span class="param-desc">Tăng từ từ khi lỗ</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Position multiplier:</span>
+                            <span class="param-value">1.2</span>
+                            <span class="param-desc">Nhân nhẹ để bảo toàn vốn</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">iCount:</span>
+                            <span class="param-value">3</span>
+                            <span class="param-desc">Tối đa 3 lệnh đồng thời</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Stop Loss:</span>
+                            <span class="param-value">30,000</span>
+                            <span class="param-desc">Cắt lỗ sớm bảo vệ vốn</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opt-card moderate">
+                    <h3><span class="emoji">🟡</span> Cấu Hình Trung Bình (Experienced)</h3>
+                    <div class="account-info">
+                        <p><strong>Vốn khuyến nghị:</strong> $1000 - $3000</p>
+                        <p><strong>Mục tiêu:</strong> 10-20%/tháng</p>
+                    </div>
+                    <div class="params-detail">
+                        <div class="param-row">
+                            <span class="param-name">First Step:</span>
+                            <span class="param-value">0.02</span>
+                            <span class="param-desc">Lot vừa phải</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Step 1:</span>
+                            <span class="param-value">50</span>
+                            <span class="param-desc">Cân bằng risk/reward</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Position multiplier:</span>
+                            <span class="param-value">1.3</span>
+                            <span class="param-desc">Tăng vừa phải</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">iCount:</span>
+                            <span class="param-value">5</span>
+                            <span class="param-desc">Cài đặt mặc định</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Stop Loss:</span>
+                            <span class="param-value">80,000</span>
+                            <span class="param-desc">Cho phép recovery tốt hơn</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opt-card aggressive">
+                    <h3><span class="emoji">🔴</span> Cấu Hình Tích Cực (Expert)</h3>
+                    <div class="account-info">
+                        <p><strong>Vốn khuyến nghị:</strong> $3000+</p>
+                        <p><strong>Mục tiêu:</strong> 20-50%/tháng</p>
+                    </div>
+                    <div class="params-detail">
+                        <div class="param-row">
+                            <span class="param-name">First Step:</span>
+                            <span class="param-value">0.05</span>
+                            <span class="param-desc">Lot lớn để tối đa lợi nhuận</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Step 1:</span>
+                            <span class="param-value">80</span>
+                            <span class="param-desc">Cài đặt gốc</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Position multiplier:</span>
+                            <span class="param-value">1.5</span>
+                            <span class="param-desc">Nhân mạnh để recovery</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">iCount:</span>
+                            <span class="param-value">7</span>
+                            <span class="param-desc">Nhiều lệnh đồng thời</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-name">Stop Loss:</span>
+                            <span class="param-value">150,000</span>
+                            <span class="param-desc">Chấp nhận risk cao</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title"><span class="emoji">⚙️</span> Tham Số Quan Trọng Cần Biết Chi Tiết</h2>
+            
+            <div class="detailed-params">
+                <div class="param-section">
+                    <h3><span class="emoji">💰</span> Nhóm Quản Lý Vốn & Lot Size</h3>
+                    <div class="param-details-grid">
+                        <div class="param-detail-card">
+                            <h4>First Step (Lot đầu tiên)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 50 (= 0.50 lot)</p>
+                                <p><strong>Ý nghĩa:</strong> Kích thước lệnh đầu tiên khi bot mở vị thế</p>
+                                <p><strong>Khuyến nghị:</strong></p>
+                                <ul>
+                                    <li>Tài khoản nhỏ ($500): 10-20</li>
+                                    <li>Tài khoản trung bình ($1000): 30-50</li>
+                                    <li>Tài khoản lớn ($3000+): 50-100</li>
+                                </ul>
+                                <p><strong>⚠️ Lưu ý:</strong> Giá trị này quyết định rủi ro ban đầu</p>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>Step 1 (Khoảng cách mở lệnh)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 80 points</p>
+                                <p><strong>Ý nghĩa:</strong> Khoảng cách tối thiểu giữa các lệnh</p>
+                                <p><strong>Cách tính:</strong> 1 point = 0.0001 (EUR/USD)</p>
+                                <p><strong>Tùy chỉnh theo cặp tiền:</strong></p>
+                                <ul>
+                                    <li>Major pairs (EUR/USD, GBP/USD): 50-100</li>
+                                    <li>Cross pairs (EUR/GBP, AUD/CAD): 80-150</li>
+                                    <li>Exotic pairs: 100-200</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>Position Multiplier (Hệ số nhân lot)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 1.3</p>
+                                <p><strong>Ý nghĩa:</strong> Mỗi lệnh tiếp theo sẽ lớn hơn lệnh trước</p>
+                                <p><strong>Ví dụ:</strong> Lệnh 1: 0.1 → Lệnh 2: 0.13 → Lệnh 3: 0.17</p>
+                                <p><strong>Chiến lược:</strong></p>
+                                <ul>
+                                    <li>An toàn: 1.1 - 1.2</li>
+                                    <li>Cân bằng: 1.3 - 1.4</li>
+                                    <li>Tích cực: 1.5 - 2.0</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>Lot Digit (Độ chính xác lot)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 2</p>
+                                <p><strong>Ý nghĩa:</strong> Số chữ số thập phân cho lot size</p>
+                                <p><strong>Ví dụ:</strong></p>
+                                <ul>
+                                    <li>Digit = 1: 0.1, 0.2, 0.3...</li>
+                                    <li>Digit = 2: 0.01, 0.02, 0.03...</li>
+                                    <li>Digit = 3: 0.001, 0.002, 0.003...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="param-section">
+                    <h3><span class="emoji">🛡️</span> Nhóm Bảo Vệ Rủi Ro</h3>
+                    <div class="param-details-grid">
+                        <div class="param-detail-card">
+                            <h4>Stop Loss (Cắt lỗ tối đa)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 100,000 points</p>
+                                <p><strong>Ý nghĩa:</strong> Mức lỗ tối đa trước khi đóng tất cả lệnh</p>
+                                <p><strong>Tính toán:</strong> 100,000 points = 1000 pips</p>
+                                <p><strong>Khuyến nghị theo % tài khoản:</strong></p>
+                                <ul>
+                                    <li>Bảo thủ: 5-10% tài khoản</li>
+                                    <li>Trung bình: 10-20% tài khoản</li>
+                                    <li>Mạo hiểm: 20-30% tài khoản</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>Take Profit (Chốt lời)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 30.0</p>
+                                <p><strong>Ý nghĩa:</strong> Mức lợi nhuận để đóng tất cả lệnh</p>
+                                <p><strong>Đơn vị:</strong> Đồng tiền tài khoản (USD/EUR)</p>
+                                <p><strong>Cách tối ưu:</strong></p>
+                                <ul>
+                                    <li>Tài khoản $500: TP = 5-15</li>
+                                    <li>Tài khoản $1000: TP = 15-30</li>
+                                    <li>Tài khoản $3000+: TP = 30-100</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>MaxLossCloseAll (Đóng khẩn cấp)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 5.0</p>
+                                <p><strong>Ý nghĩa:</strong> Đóng tất cả khi equity giảm % này</p>
+                                <p><strong>Ví dụ:</strong> Tài khoản $1000, set 5.0 = đóng khi còn $950</p>
+                                <p><strong>An toàn:</strong> 2-5%</p>
+                                <p><strong>Cân bằng:</strong> 5-10%</p>
+                                <p><strong>Mạo hiểm:</strong> 10-20%</p>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>Min Distance (Khoảng cách tối thiểu)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 80 points</p>
+                                <p><strong>Ý nghĩa:</strong> Khoảng cách tối thiểu giữa các lệnh</p>
+                                <p><strong>Mục đích:</strong> Tránh spam lệnh khi giá sideway</p>
+                                <p><strong>Tùy chỉnh:</strong></p>
+                                <ul>
+                                    <li>Scalping: 20-50 points</li>
+                                    <li>Day trading: 50-100 points</li>
+                                    <li>Swing: 100-200 points</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="param-section">
+                    <h3><span class="emoji">📊</span> Nhóm Chiến Lược & Tín Hiệu</h3>
+                    <div class="param-details-grid">
+                        <div class="param-detail-card">
+                            <h4>iCount (Số lệnh tối đa)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 5 lệnh</p>
+                                <p><strong>Ý nghĩa:</strong> Giới hạn số lệnh cùng lúc</p>
+                                <p><strong>Ảnh hưởng:</strong> Nhiều lệnh = nhiều cơ hội nhưng rủi ro cao</p>
+                                <p><strong>Khuyến nghị:</strong></p>
+                                <ul>
+                                    <li>Người mới: 2-3 lệnh</li>
+                                    <li>Có kinh nghiệm: 3-5 lệnh</li>
+                                    <li>Chuyên nghiệp: 5-10 lệnh</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>Trailing Stop (Dừng lỗ di động)</h4>
+                            <div class="param-info">
+                                <p><strong>Mặc định:</strong> 1 (Bật)</p>
+                                <p><strong>Ý nghĩa:</strong> Tự động di chuyển stop loss theo giá</p>
+                                <p><strong>Lợi ích:</strong> Bảo vệ lợi nhuận khi giá đảo chiều</p>
+                                <p><strong>Cài đặt:</strong></p>
+                                <ul>
+                                    <li>0 = Tắt trailing stop</li>
+                                    <li>1 = Bật trailing stop</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>Fractals & Candle Analysis</h4>
+                            <div class="param-info">
+                                <p><strong>Fractals:</strong> Xác định điểm đảo chiều</p>
+                                <p><strong>Candle Analysis:</strong> Phân tích mẫu hình nến</p>
+                                <p><strong>Kết hợp:</strong> Tăng độ chính xác tín hiệu</p>
+                                <p><strong>Lưu ý:</strong> Cần backtest để tối ưu</p>
+                            </div>
+                        </div>
+
+                        <div class="param-detail-card">
+                            <h4>Magic Number & Time Control</h4>
+                            <div class="param-info">
+                                <p><strong>Magic Number:</strong> 808 (ID nhận diện lệnh)</p>
+                                <p><strong>Start Hour:</strong> 1 (Bắt đầu trading)</p>
+                                <p><strong>End Hour:</strong> 20 (Dừng trading)</p>
+                                <p><strong>Mục đích:</strong> Tránh trading trong giờ rủi ro cao</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advanced-settings">
+                <h2 class="section-title"><span class="emoji">🚀</span> Cài Đặt Nâng Cao & Tối Ưu Hiệu Suất</h2>
+                
+                <div class="advanced-grid">
+                    <div class="advanced-card">
+                        <h3><span class="emoji">📊</span> Tối Ưu Theo Cặp Tiền Tệ</h3>
+                        <div class="currency-pairs">
+                            <div class="pair-setting">
+                                <h4>EUR/USD, GBP/USD (Major Pairs)</h4>
+                                <ul>
+                                    <li><strong>Min Distance:</strong> 50-80 points</li>
+                                    <li><strong>Step 1:</strong> 40-60</li>
+                                    <li><strong>Position Multiplier:</strong> 1.2-1.3</li>
+                                    <li><strong>Tính chất:</strong> Biến động ổn định, spread thấp</li>
+                                </ul>
+                            </div>
+                            <div class="pair-setting">
+                                <h4>USD/JPY, AUD/USD (Trend Strong)</h4>
+                                <ul>
+                                    <li><strong>Min Distance:</strong> 80-120 points</li>
+                                    <li><strong>Step 1:</strong> 60-100</li>
+                                    <li><strong>Position Multiplier:</strong> 1.3-1.4</li>
+                                    <li><strong>Tính chất:</strong> Trend rõ ràng, cần khoảng cách lớn</li>
+                                </ul>
+                            </div>
+                            <div class="pair-setting">
+                                <h4>GBP/JPY, EUR/GBP (Cross Pairs)</h4>
+                                <ul>
+                                    <li><strong>Min Distance:</strong> 100-200 points</li>
+                                    <li><strong>Step 1:</strong> 80-150</li>
+                                    <li><strong>Position Multiplier:</strong> 1.4-1.6</li>
+                                    <li><strong>Tính chất:</strong> Biến động lớn, cần quản lý risk cao</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="advanced-card">
+                        <h3><span class="emoji">⏰</span> Tối Ưu Theo Khung Thời Gian</h3>
+                        <div class="timeframe-settings">
+                            <div class="tf-setting">
+                                <h4>M15 - M30 (Scalping)</h4>
+                                <ul>
+                                    <li><strong>iCount:</strong> 2-3 lệnh</li>
+                                    <li><strong>Take Profit:</strong> 10-20</li>
+                                    <li><strong>Trailing Stop:</strong> Bật</li>
+                                    <li><strong>Thời gian hoạt động:</strong> 8h-17h (London + NY)</li>
+                                </ul>
+                            </div>
+                            <div class="tf-setting">
+                                <h4>H1 - H4 (Day Trading)</h4>
+                                <ul>
+                                    <li><strong>iCount:</strong> 3-5 lệnh</li>
+                                    <li><strong>Take Profit:</strong> 30-50</li>
+                                    <li><strong>Trailing Stop:</strong> Tùy chọn</li>
+                                    <li><strong>Thời gian hoạt động:</strong> 1h-20h (Cài đặt mặc định)</li>
+                                </ul>
+                            </div>
+                            <div class="tf-setting">
+                                <h4>D1 (Swing Trading)</h4>
+                                <ul>
+                                    <li><strong>iCount:</strong> 5-7 lệnh</li>
+                                    <li><strong>Take Profit:</strong> 50-100</li>
+                                    <li><strong>Trailing Stop:</strong> Tắt</li>
+                                    <li><strong>Thời gian hoạt động:</strong> 24/7</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="optimization-tips">
+                    <h3><span class="emoji">💡</span> Tips Tối Ưu Hiệu Suất</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4><span class="emoji">📈</span> Backtest Trước Khi Sử Dụng</h4>
+                            <p>Luôn test bot trên dữ liệu lịch sử ít nhất 3-6 tháng trước khi chạy live. Sử dụng Strategy Tester của MT4/MT5 với dữ liệu chất lượng cao.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4><span class="emoji">🔄</span> Theo Dõi Drawdown</h4>
+                            <p>Giám sát chặt chẽ drawdown tối đa. Nếu vượt quá 30% tài khoản, hãy tạm dừng và điều chỉnh tham số.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4><span class="emoji">📊</span> Phân Tích Kết Quả Hàng Tuần</h4>
+                            <p>Review hiệu suất mỗi tuần, chú ý đến: Win Rate, Profit Factor, Maximum Drawdown, và số lệnh trung bình mỗi ngày.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4><span class="emoji">🌐</span> Sử Dụng VPS</h4>
+                            <p>VPS đảm bảo bot chạy 24/7 không bị gián đoạn. Chọn VPS gần server broker để giảm latency.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-management-detail">
+                <h2 class="section-title"><span class="emoji">⚠️</span> Quản Lý Rủi Ro Chi Tiết</h2>
+                
+                <div class="risk-scenarios">
+                    <div class="scenario-card danger">
+                        <h3><span class="emoji">🚨</span> Tình Huống Nguy Hiểm</h3>
+                        <div class="scenario-content">
+                            <h4>Khi nào cần dừng bot ngay lập tức:</h4>
+                            <ul>
+                                <li><strong>Drawdown > 40%:</strong> Dừng và review toàn bộ setting</li>
+                                <li><strong>News quan trọng:</strong> NFP, Fed Meeting, Brexit votes</li>
+                                <li><strong>Market Gap:</strong> Thứ 2 đầu tuần hoặc sau holiday</li>
+                                <li><strong>Spread tăng đột biến:</strong> > 5 pips cho major pairs</li>
+                                <li><strong>Chuỗi lỗ > 10 lệnh:</strong> Có thể algo không phù hợp thời điểm</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card warning">
+                        <h3><span class="emoji">⚡</span> Tình Huống Cảnh Báo</h3>
+                        <div class="scenario-content">
+                            <h4>Cần theo dõi chặt chẽ khi:</h4>
+                            <ul>
+                                <li><strong>Drawdown 20-30%:</strong> Giảm lot size xuống 50%</li>
+                                <li><strong>Win Rate < 40%:</strong> Kiểm tra lại tham số</li>
+                                <li><strong>Profit Factor < 1.2:</strong> Bot không hiệu quả</li>
+                                <li><strong>Quá nhiều lệnh/ngày:</strong> > 20 lệnh có thể over-trading</li>
+                                <li><strong>Thời gian recovery dài:</strong> > 1 tuần để về break-even</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card success">
+                        <h3><span class="emoji">✅</span> Tình Huống Tốt</h3>
+                        <div class="scenario-content">
+                            <h4>Có thể tăng risk khi:</h4>
+                            <ul>
+                                <li><strong>Win Rate > 60%:</strong> Cân nhắc tăng lot size 20%</li>
+                                <li><strong>Profit Factor > 1.5:</strong> Bot hoạt động hiệu quả</li>
+                                <li><strong>Drawdown < 10%:</strong> Risk được kiểm soát tốt</li>
+                                <li><strong>Recovery nhanh:</strong> < 2 ngày về break-even</li>
+                                <li><strong>Consistent profit:</strong> Lời 2-3 tuần liên tiếp</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="emergency-procedures">
+                    <h3><span class="emoji">🆘</span> Quy Trình Khẩn Cấp</h3>
+                    <div class="emergency-steps">
+                        <div class="emergency-step">
+                            <div class="step-icon">1</div>
+                            <div class="step-content">
+                                <h4>Phát hiện vấn đề</h4>
+                                <p>Drawdown quá lớn, lỗi hệ thống, hoặc thị trường bất thường</p>
+                            </div>
+                        </div>
+                        <div class="emergency-step">
+                            <div class="step-icon">2</div>
+                            <div class="step-content">
+                                <h4>Dừng bot ngay lập tức</h4>
+                                <p>Nhấn nút "Expert Advisors" để disable, hoặc remove bot khỏi chart</p>
+                            </div>
+                        </div>
+                        <div class="emergency-step">
+                            <div class="step-icon">3</div>
+                            <div class="step-content">
+                                <h4>Đóng lệnh thủ công</h4>
+                                <p>Đánh giá từng lệnh và đóng những lệnh có risk cao nhất trước</p>
+                            </div>
+                        </div>
+                        <div class="emergency-step">
+                            <div class="step-icon">4</div>
+                            <div class="step-content">
+                                <h4>Phân tích nguyên nhân</h4>
+                                <p>Review log, kiểm tra setting, và xác định lỗi trước khi restart</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="troubleshooting">
+                <h3><span class="emoji">🔧</span> Troubleshooting Section</h3>
+                <ul>
+                    <li>Bot không hiển thị trên chart</li>
+                    <li>Không có tín hiệu xuất hiện</li>
+                    <li>MetaTrader báo lỗi "Expert Advisor disabled"</li>
+                    <li>Lệnh không được mở tự động</li>
+                    <li>Tips tránh lỗi thường gặp</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title"><span class="emoji">🚀</span> Quick Setup Templates</h2>
+            
+            <div class="setup-steps">
+                <div class="step-card">
+                    <div class="step-number">MT4</div>
+                    <div class="step-title">Template Cho Người Mới</div>
+                    <div class="step-content">
+                        <strong>Cài đặt an toàn:</strong><br>
+                        • First Step: 10<br>
+                        • Stop Loss: 50,000<br>
+                        • iCount: 3<br>
+                        • Test trên demo ít nhất 1 tuần
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">MT5</div>
+                    <div class="step-title">Template Cho Trader Kinh Nghiệm</div>
+                    <div class="step-content">
+                        <strong>Cài đặt tích cực:</strong><br>
+                        • First Step: 50<br>
+                        • Position multiplier: 1.5<br>
+                        • iCount: 7<br>
+                        • Sử dụng VPS để chạy 24/7
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><span class="emoji">💡</span> <strong>Ghi nhớ:</strong> Luôn test trên demo trước khi sử dụng thật. Trading có rủi ro, chỉ đầu tư số tiền bạn có thể chấp nhận mất.</p>
+            <p style="margin-top: 15px; opacity: 0.8;">Hand of God Bot V2.2 by TechWiz © 2024</p>
+        </div>
+    </div>
+</body>
+</html>
